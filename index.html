@@ -26,7 +26,7 @@
 
       <article>
         <h1>Slide Availablity</h1>
-        <p><a href="http://austinrfnd.github.com/ruby_mini_language_festival">http://austinrfnd.github.com/ruby_mini_language_festival</a></p>
+        <p><a href="http://austinrfnd.github.com/ruby_mini_language_festival">http://austinrfnd.github.com/mini_language_festival_presentation</a></p>
       </article>
       
       <article>
@@ -151,7 +151,12 @@ end
               @name == @name.reverse
             end
           end
+        </code></pre>
+      </article>
 
+      <article>
+        <h3>Modules</h3>
+        <pre><code data-language='ruby'>
           austin = Person.new
           austin.name = "Austin"
           austin.palindrome? # false
@@ -161,11 +166,22 @@ end
       </article>
 
       <article>
+        <h3>Modules</h3>
+        <pre><code data-language='ruby'>
+          new_car = Car.new
+          new_car.name = "Chevy Volt"
+          new_car.palindrome? # false
+          new_car.name = 'RaceCar'
+          new_car.palindrome? # true
+        </code></pre>
+      </article>      
+
+      <article>
         <h3>Test/Unit</h3>
         <ul class='build'>
           <li>Test unit is a standard library in Ruby!</li>
           <li>Most Ruby projects subscribe to the TDD paradigm</li>
-          <li><img src='gem_write_tests.png' /></li>
+          <li><img src='img/gem_write_tests.png' /></li>
         </ul>
       </article>
 
@@ -179,7 +195,6 @@ end
               "#{@first_name} #{@last_name}"
             end
           end
-
 
           person = Person.new
           person.first_name = "Austin"
@@ -217,7 +232,19 @@ end
 
           1 tests, 1 assertions, 0 failures, 0 errors          
         </code></pre>
-      </article>      
+      </article>
+
+      <article>
+        <h3>XML? Try YML!</h3>
+        <pre><code data-language='generic'>
+beta:
+  adapter: mysql2
+  encoding: utf8
+  database: beta_database
+  username: foobar_username
+  password: foobar
+        </code></pre>
+      </article>
 
       <article>
         <h3>Ruby on Rails</h3>
