@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation</title>
+
+    <meta charset='utf-8' />
+    <link href='styles.css' rel='stylesheet' type='text/css' />
+    <link href="rainbow/themes/solarized-light.css" rel="stylesheet" type="text/css" />
+    <script src='google_slides.js'></script>
+    <script src="rainbow/rainbow.min.js"></script>
+    <script src="rainbow/language/generic.js"></script>
+    <script src="rainbow/language/ruby.js"></script>
+    <script src="rainbow/language/coffeescript.js"></script>
+
+  </head>
+
+  <body style='display: none'>
+
+    <section class='slides layout-widescreen template-default'>
+
+      <article>
+        <h1>Ruby, How Fun!</h1>
+        <h2 class="subtitle">Mini Language Festival</h2>
+        <p>by Austin Fonacier <a href='http://twitter.com/austinrfnd'>@austinrfnd</a></p>
+      </article>
+
+      <article>
+        <h1>Slide Availablity</h1>
+        <p><a href="http://austinrfnd.github.com/ruby_mini_language_festival">http://austinrfnd.github.com/ruby_mini_language_festival</a></p>
+      </article>
+      
+      <article>
+        <h3>Who Am I?</h3>
+        <h4 class='subtitle'>Spokeo (Pasadena, CA)</h4>
+        <h5>Software Architect</h5>
+        <img class='centered' src='img/austin_image.jpg' style="width: 35%; height: 70%"/>
+      </article>
+
+      <article>
+        <h3>Why I Use Ruby</h3>
+
+        <ul class='build'>
+          <li>It's Fun.</li>
+          <li>Plenty of resources; websites, books and people.</li>
+          <li>Ruby on Rails</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>History of Ruby</h3>
+        <ul class='build'>
+          <li>1993 by Yukihiro Matsumoto (Matz)</li>
+          <li>"I wanted a scripting language that was more powerful than Perl, and more object-oriented than Python. That's why I decided to design my own language."</li>
+          <li>We are currently on ruby 2.0</li>
+        </ul> 
+      </article>
+
+      <article>
+        <h3>Everything is an Object!</h3>
+        <pre><code data-language="ruby">
+          1.class # Fixnum
+          1.0.class # Float
+          true.class # TrueClass
+          false.class # FalseClass
+          nil.class # NilClass
+          true.class.class # Class
+          Array.class # Class
+          String.class # Class
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Objects... So What?</h3>
+        <ul class='build'>
+          <li>No such thing as primitive types (int, float, etc).</li>
+          <li>Instead everything is an object: class Fixnum, class Float.</li>
+          <li>EVERYTHING has an interface for method invocations.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Object Methods</h3>
+
+        <ul>
+          <li>addition (+) is a method on Fixnum class</li>
+        </ul>
+
+        <pre><code data-language="ruby">
+5+5 # 10
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Object Methods</h3>
+        <pre><code data-language="ruby">
+5.times do
+  puts "Hello World"
+end
+
+# Hello World
+# Hello World
+# Hello World
+# Hello World
+# Hello World
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Object Methods</h3>
+        <pre><code data-language="php">
+          user = new User
+        </pre></code>
+
+        <pre><code data-language="ruby">
+          user = User.new
+        </pre></code>
+
+      </article>
+
+      <article>
+        <h3>Dynamic Open Classes</h3>
+        <p>At any given time you can open up ANY class and modify or add funcionality.</p>
+        <pre><code data-language='ruby'>
+          class Array
+            def sum
+              inject {|sum, x| sum + x}
+            end
+          end
+
+          [1,2,3].sum # 6
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Modules</h3>
+        <pre><code data-language='ruby'>
+          class Person
+            attr_access :name
+
+            include palindrome
+          end
+
+          class Car
+            attr_accessor :name
+
+            include palindrome
+          end
+
+          module Palindrome
+            def palindrome?
+              @name == @name.reverse
+            end
+          end
+
+          austin = Person.new
+          austin.name = "Austin"
+          austin.palindrome? # false
+          austin.name = 'foooof'
+          austin.palindrome? # true
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Test/Unit</h3>
+        <ul class='build'>
+          <li>Test unit is a standard library in Ruby!</li>
+          <li>Most Ruby projects subscribe to the TDD paradigm</li>
+          <li><img src='gem_write_tests.png' /></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Test/Unit</h3>
+        <pre><code data-language='ruby'>
+          class Person
+            attr_accessor :first_name, :last_name
+
+            def full_name
+              "#{@first_name} #{@last_name}"
+            end
+          end
+
+
+          person = Person.new
+          person.first_name = "Austin"
+          person.last_name = "Fonacier"
+          person.full_name # "Austin Fonacer"
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Test/Unit</h3>
+        <pre><code data-language='ruby'>
+          require 'test/unit'
+          require 'person'
+
+          class PersonTests < Test::Unit::TestCase
+            def test_full_name_is_first_and_last
+              person = Person.new
+              person.first_name = "Austin"
+              person.last_name = "Fonacier"
+
+              assert_equal "Austin Fonacier", person.full_name
+            end
+          end
+        </code></pre>
+      </article>
+
+      <article>
+        <h3>Test/Unit</h3>
+        <pre><code data-language='generic'>
+          % ruby test/person_tests.rb 
+          Loaded suite test/person_tests
+          Started
+          .
+          Finished in 0.005931 seconds.
+
+          1 tests, 1 assertions, 0 failures, 0 errors          
+        </code></pre>
+      </article>      
+
+      <article>
+        <h3>Ruby on Rails</h3>
+        <ul class='build'>
+          <li>Fun!</li>
+          <li>Easy!</li>
+          <li>Ton of learning resources.</li>
+          <li>Powerful</li>
+          <li>rails generate scaffold blog title:string body:text</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>The Community</h3>
+        <ul class='build'>
+          <li>Vibrant and great developer community.</li>
+          <li>Easy, free and informative help everywhere you look.</li>
+          <li>Local meetups for people of all levels</li>
+          <li>LA Ruby</li>
+          <li>Rails Girls LA</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>In Conclusion</h3>
+        <ul class='build'>
+          <li>I literally scratched the surface on Ruby, Rails and fun.</li>
+          <li>I use Ruby and Rails because it's fun and isn't that most important?</li>
+          <li>Community is there to help you through your questions and queries.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>For More Info:</h3>
+        <ul>
+          <li><a href="http://rubykoans.com/">Ruby Koans</a></li>
+          <li><a href="http://tryruby.org/">Try Ruby</a></li>
+          <li><a href="ruby-doc.org">ruby doc org</a></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Thank You: Questions?</h3>
+
+      </article>
+
+    </section>
+
+  </body>
+</html>
